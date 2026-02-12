@@ -9,9 +9,18 @@ class Userform(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2','first_name','last_name']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.help_text = None
+
+
 class Loginform(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+
 
 class AddCategoryForm(forms.ModelForm):
     class Meta:
